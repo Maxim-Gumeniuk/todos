@@ -6,6 +6,7 @@ import { todos } from '../types/todos.interface';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TodosService {
   todos = new BehaviorSubject<todos[]>([]);
   filter = new BehaviorSubject<FilterEnum>(FilterEnum.all);
@@ -39,17 +40,21 @@ export class TodosService {
   }
 
   changeTodo(id: string, text: string): void {
-    const updatedTodos = this.todos.getValue().map((todo) => {
-      if (todo.id === id) {
-        return {
-          ...todo,
-          text,
-        };
-      }
+    if (text.trim().length > 0) {
+      const updatedTodos = this.todos.getValue().map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            text,
+          };
+        }
 
-      return todo;
-    });
-    this.todos.next(updatedTodos);
+        return todo;
+      });
+      this.todos.next(updatedTodos);
+    }
+
+    return;
   }
 
   removeTodo(id: string): void {
