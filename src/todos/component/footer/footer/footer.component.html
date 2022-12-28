@@ -1,0 +1,37 @@
+<footer class="footer" [ngClass]="{hidden: todoClass | async}">
+  <span class="todo-count">
+    <strong>{{ activeTodo | async }}</strong>
+    {{ itemsLeftText | async }}
+  </span>
+  <ul class="filters">
+    <li>
+      <a
+        href="/"
+        [ngClass]="{ selected: (filter | async) === filterEnum.all }"
+        (click)="changeFilter($event, filterEnum.all)"
+      >
+        All
+      </a>
+    </li>
+    <li>
+      <a
+        href="/"
+        [ngClass]="{ selected: (filter | async) === filterEnum.active }"
+        (click)="changeFilter($event, filterEnum.active)"
+      >
+        Active
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="/"
+        [ngClass]="{ selected: (filter | async) === filterEnum.completed }"
+        (click)="changeFilter($event, filterEnum.completed)"
+      >
+        Completed
+      </a>
+    </li>
+    <button class="clear-completed" (click)="clearCompletedTodos()" ng-show="completedCount">Clear completed</button>
+  </ul>
+</footer>
