@@ -57,6 +57,7 @@ export class TodosService {
     return;
   }
 
+
   removeTodo(id: string): void {
     const updatedTodos = this.todos
       .getValue()
